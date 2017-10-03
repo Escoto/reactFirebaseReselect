@@ -1,6 +1,8 @@
 # reactFirebaseReselect
 
-Interested in learning [Redux](https://www.udemy.com/react-redux/)?
+This is an application I created to learn and practice React and Redux
+I used this course [react-redux](https://www.udemy.com/react-redux/) from Udemy
+to start learning. 
 
 ### Getting Started
 
