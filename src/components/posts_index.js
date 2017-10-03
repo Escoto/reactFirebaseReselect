@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {fetchPosts} from '../actions/index';
+import {fetchPosts, selectPosts} from '../actions/index';
 import {Link} from 'react-router';
+import SelectedPostsList from '../components/selected_posts_list';
 
 class PostsIndex extends Component {
 
@@ -13,6 +14,7 @@ class PostsIndex extends Component {
     return this.props.posts.map((post)=>{
       return (
         <li className="list-group-item" key={post.id}>
+          <input type="checkbox" value={post.id}  onChange={()=>this.props.selectPosts(post)}/>
           <Link to={`posts/${post.id}`}>
             <strong>{post.title}</strong>
             <span className="pull-xs-right">{post.categories}</span>
@@ -30,7 +32,10 @@ class PostsIndex extends Component {
             Add a Post
           </Link>
         </div>
-        <h3>Posts</h3>
+        <h3>Selected Posts</h3>
+        <selected_posts_list />
+        <hr />
+        <h3>All Posts</h3>
         <ul className = "list-group">
           {this.renderPosts()}
         </ul>
@@ -47,4 +52,4 @@ function mapStateToProps(state){
 //   return bindActionCreators({fetchPosts}, dispatch);
 // }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, { fetchPosts, selectPosts })(PostsIndex);

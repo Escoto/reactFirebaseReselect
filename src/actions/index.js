@@ -4,6 +4,7 @@ export const FETCH_POSTS = 'FETCH_POSTS';
 export const CREATE_POSTS = 'CREATE_POSTS';
 export const FETCH_POST = 'FETCH_POST';
 export const DELETE_POST = 'DELETE_POST';
+export const SELECT_POSTS = 'SELECT_POSTS';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 
@@ -53,6 +54,16 @@ export function deletePost(id) {
     return {
         type: DELETE_POST,
         payload: request
+    };
+
+};
+
+
+export function selectPosts(post) {
+
+    return {
+        type: SELECT_POSTS,
+        payload: post
     };
 
 };
