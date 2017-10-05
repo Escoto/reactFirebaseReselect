@@ -12,9 +12,12 @@ class PostsIndex extends Component {
   }
 
   renderPosts(){
-    console.log(this.props.posts);
+    
+    if(!this.props.posts)
+      return;
+    
     if(this.props.posts.length == 0) 
-    return;
+      return;
 
     var list = this.props.posts.map((post)=>{
       return (

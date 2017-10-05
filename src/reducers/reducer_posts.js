@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import {FETCH_POSTS, FETCH_POST, SELECT_POSTS, DELETE_POST_LIST} from '../actions/index';
+import {FETCH_POSTS, FETCH_POST, SELECT_POSTS, DELETE_POST_LIST, FETCH_POSTS_ON_DELETE} from '../actions/index';
 
-const INITIAL_STATE = { all: [], post: null, selectedPostsIDs:[] };
+const INITIAL_STATE = { all:[], post: null, selectedPostsIDs:[] };
 
 export default function( state = INITIAL_STATE, action) {
 
@@ -9,7 +9,9 @@ export default function( state = INITIAL_STATE, action) {
         case FETCH_POST:
             return {...state, post: action.payload.data };
         case FETCH_POSTS:
-            return {...state, all: action.payload.data };
+            return {...state, all: action.payload };
+        case FETCH_POSTS_ON_DELETE:
+            return {...INITIAL_STATE, all: action.payload.data };
         case DELETE_POST_LIST:
             return INITIAL_STATE;
         case SELECT_POSTS:

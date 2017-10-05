@@ -1,0 +1,16 @@
+{
+    "posts":[
+        {
+            "id":1,
+            "title":"title1",
+            "categories":"category",
+            "content":"my content"
+        },
+        {
+            "id":2,
+            "title":"title2",
+            "categories":"category2",
+            "content":"my content 2"
+        }
+    ]
+}

@@ -1,22 +1,18 @@
 import _ from 'lodash';
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import SelectedPostsSelector from '../selectors/selected_posts';
-import {fetchPosts, deletePostList} from '../actions/index';
+import {fetchPostsOnDelete, deletePostList} from '../actions/index';
 import {Link} from 'react-router';
 
 class SelectedPostsList extends Component {
-
-    static contextTypes = {
-        router: PropTypes.object
-    };
 
     onDeleteClick(){
         if(this.props.posts.length == 0) 
             return;
         
         this.props.deletePostList(this.props.posts)
-            .then(()=>this.props.fetchPosts());
+            .then(()=>this.props.fetchPostsOnDelete());
     }
 
     render(){ return(
@@ -45,4 +41,4 @@ const mapStateToProps = state => {
     return {posts: SelectedPostsSelector(state.posts)}
 };
 
-export default connect(mapStateToProps, {fetchPosts,deletePostList})(SelectedPostsList);
+export default connect(mapStateToProps, {fetchPostsOnDelete,deletePostList})(SelectedPostsList);
