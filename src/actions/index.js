@@ -1,10 +1,11 @@
+import _ from 'lodash';
 import axios from 'axios';
-
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const CREATE_POSTS = 'CREATE_POSTS';
 export const FETCH_POST = 'FETCH_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const SELECT_POSTS = 'SELECT_POSTS';
+export const DELETE_POST_LIST = 'DELETE_POST_LIST';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 
@@ -13,7 +14,6 @@ const API_KEY = '?key=rafakey1234qwer';
 const KEY_URL = `${ROOT_URL}/posts${API_KEY}`;
 
 export function fetchPosts (){
-    
     const request = axios.get(KEY_URL);
     
     return {
@@ -24,7 +24,6 @@ export function fetchPosts (){
 };
 
 export function createPost(props) {
-    
     const request = axios.post(KEY_URL, props);
     
     return {
@@ -34,9 +33,7 @@ export function createPost(props) {
 
 };
 
-
 export function fetchPost(id) {
-    
     const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
     
     return {
@@ -46,9 +43,7 @@ export function fetchPost(id) {
 
 };
 
-
 export function deletePost(id) {
-    
     const request = axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`);
     
     return {
@@ -58,12 +53,23 @@ export function deletePost(id) {
 
 };
 
-
-export function selectPosts(post) {
+export function deletePostList(posts) {
+    
+    const requests = axios.all(_.map(posts, post =>
+        axios.delete(`${ROOT_URL}/posts/${post.id}${API_KEY}`)
+    ));
 
     return {
+        type: DELETE_POST_LIST,
+        payload: requests
+    };
+    
+};
+
+export function selectPosts(post = null, event = null) {
+    return {
         type: SELECT_POSTS,
-        payload: post
+        payload: (!post)?post:post.id
     };
 
 };
